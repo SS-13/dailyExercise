@@ -41,12 +41,44 @@ type Includes<T extends readonly any[], U> = T extends [infer F, ...infer R]
     : Includes<R, U>
   : false;
 
-type Equal<X, Y> = (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y
+type Equal1<X, Y> = (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y
   ? 1
   : 2
   ? true
   : false;
 
 type Equal2<X, Y> = X extends Y ? true : false;
-type a = Equal<true, boolean>; // false
+type a = Equal1<true, boolean>; // false
 type b = Equal2<true, boolean>; // true
+type c = true extends boolean ? true : false; // true
+
+// Implement the generic version of `Array.push`
+type Push<T extends any[], U> = [...T, U];
+
+// Implement the type version of `Array.unshift`
+type Unshift<T extends any[], U> = [U, ...T];
+
+// Implement the built-in Parameters<T> generic without using it.
+type MyParameters<T extends (...args: any[]) => any> = T extends (
+  ...args: infer P
+) => any
+  ? P
+  : never;
+
+// Implement the built-in `ReturnType<T>` generic without using it.
+type MyReturnType<T extends (...arg: any[]) => any> = T extends (
+  ...arg: any[]
+) => infer P
+  ? P
+  : never;
+
+// Implement the built-in `Omit<T, K>` generic without using it.
+type MyOmit<T extends object, K extends keyof T> = {
+  [P in keyof T extends infer R
+    ? R extends keyof T
+      ? R extends K
+        ? never
+        : R
+      : never
+    : never]: T[P];
+};

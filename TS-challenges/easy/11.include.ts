@@ -30,11 +30,11 @@ type Includes<T extends readonly any[], U> = T extends [infer F, ...infer R]
     : Includes<R, U>
   : false;
 
-type Includes2<T extends readonly any[], U> = T extends [infer F, ...infer R]
-  ? F extends U
-    ? true
-    : Includes<R, U>
-  : false;
+// type Includes2<T extends readonly any[], U> = T extends [infer F, ...infer R]
+//   ? F extends U
+//     ? true
+//     : Includes<R, U>
+//   : false;
 
 // type Includes<T extends readonly any[], E> = E extends T[number] ? true : false;
 
