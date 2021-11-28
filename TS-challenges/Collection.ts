@@ -82,3 +82,34 @@ type MyOmit<T extends object, K extends keyof T> = {
       : never
     : never]: T[P];
 };
+
+// Implement a generic `MyReadonly2<T, K>` which takes two type argument `T` and `K`.
+type MyReadonly2<T extends object, K extends keyof T = keyof T> = {
+  readonly [P in K]: T[P];
+} & Omit<T, K>;
+
+// Implement a generic `DeepReadonly<T>` which make every parameter of an object - and its sub-objects recursively - readonly.
+type DeepReadonly<T> = {
+  readonly [P in keyof T]: T[P] extends
+    | number
+    | string
+    | boolean
+    | ((...arg: any[]) => any)
+    ? T[P]
+    : DeepReadonly<T[P]>;
+};
+
+// Implement a generic `TupleToUnion<T>` which covers the values of a tuple to its values union.
+type TupleToUnion<T extends any[]> = T[number];
+
+// In this challenge, you need to type an object or a class - whatever you like - to provide two function `option(key, value)` and `get()`. In `option`, you can extend the current config type by the given key and value. We should about to access the final result via `get`.
+type Chainable<T = {}> = {
+  option<K extends string, V extends any>(
+    key: K,
+    value: V
+  ): Chainable<T & { [key in K]: V }>;
+  get(): T;
+};
+
+// Implement a generic `Last<T>` that takes an Array `T` and returns its last element.
+type Last<T extends any[]> = T extends [...infer R, infer V] ? V : never;
