@@ -113,3 +113,13 @@ type Chainable<T = {}> = {
 
 // Implement a generic `Last<T>` that takes an Array `T` and returns its last element.
 type Last<T extends any[]> = T extends [...infer R, infer V] ? V : never;
+
+// Implement a generic `Pop<T>` that takes an Array `T` and returns an Array without it's last element.
+type Pop<T extends any[]> = T extends [...infer R, infer P] ? R : never;
+
+//  Type the function `PromiseAll` that accepts an array of PromiseLike objects, the returning value should be `Promise<T>` where `T` is the resolved result array.
+declare function PromiseAll<T extends any[]>(
+  values: readonly [...T]
+): Promise<{
+  [key in keyof T]: T[key] extends PromiseLike<infer V> ? V : T[key];
+}>;
