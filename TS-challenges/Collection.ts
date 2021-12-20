@@ -123,3 +123,30 @@ declare function PromiseAll<T extends any[]>(
 ): Promise<{
   [key in keyof T]: T[key] extends PromiseLike<infer V> ? V : T[key];
 }>;
+
+// In this challenge, we would like to get the corresponding type by searching for the common `type` field in the union `Cat | Dog`. In other words, we will expect to get `Dog` for `LookUp<Dog | Cat, 'dog'>` and `Cat` for `LookUp<Dog | Cat, 'cat'>` in the following example.
+type LookUp<U, T> = U extends { type: T } ? U : never;
+
+// Implement `TrimLeft<T>` which takes an exact string type and returns a new string with the whitespace beginning removed.
+type Space = " " | "\n" | "\t";
+type TrimLeft<S extends string> = S extends `${Space}${infer U}`
+  ? TrimLeft<U>
+  : S;
+
+// Implement `Trim<T>` which takes an exact string type and returns a new string with the whitespace from both ends removed.
+// type Space = " " | "\n" | "\t";
+type NoSpace<Str extends string> = Str extends `${string}${Space}`
+  ? false
+  : Str extends `${Space}${string}`
+  ? false
+  : true;
+// type TrimLeft<Str extends string> = Str extends `${Space}${infer Res}`
+//   ? TrimLeft<Res>
+//   : Str;
+type TrimRight<Str extends string> = Str extends `${infer Res}${Space}`
+  ? TrimRight<Res>
+  : Str;
+
+type Trim<S extends string> = NoSpace<S> extends true
+  ? S
+  : TrimLeft<TrimRight<S>>;

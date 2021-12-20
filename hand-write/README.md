@@ -7,3 +7,5 @@
 - [x] 11 月 22 日 [232. 用栈实现队列](https://leetcode-cn.com/problems/implement-queue-using-stacks/)
 - [x] 11 月 23 日 [768. 最多能完成排序的块 II](https://leetcode-cn.com/problems/max-chunks-to-make-sorted-ii/)
 - [ ] 11 月 24 日 [61. 旋转链表](https://leetcode-cn.com/problems/rotate-list/)
+- 
+- [ ] 12 月 01 日 [146. LRU 缓存机制](https://leetcode-cn.com/problems/lru-cache/)
