@@ -150,3 +150,26 @@ type TrimRight<Str extends string> = Str extends `${infer Res}${Space}`
 type Trim<S extends string> = NoSpace<S> extends true
   ? S
   : TrimLeft<TrimRight<S>>;
+
+
+
+
+  interface Todo {
+    title: string;
+    description: string;
+  }
+   
+  function updateTodo(todo: Todo, fieldsToUpdate: Partial<Todo>) {
+    return { ...todo, ...fieldsToUpdate };
+  }
+   
+  const todo1 = {
+    title: "organize desk",
+    description: "clear clutter",
+  };
+   
+  const todo2 = updateTodo(todo1, {
+    description: "throw out trash",
+  });
+  Try
+  

@@ -3,6 +3,11 @@
 
 
 "@type-challenges/utils@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.npmmirror.com/@type-challenges/utils/download/@type-challenges/utils-0.1.1.tgz#18ce289fb84caf1c13eee211226dbf2bc6195ed3"
-  integrity sha1-GM4on7hMrxwT7uIRIm2/K8YZXtM=
+  "integrity" "sha1-GM4on7hMrxwT7uIRIm2/K8YZXtM="
+  "resolved" "https://registry.npmmirror.com/@type-challenges/utils/download/@type-challenges/utils-0.1.1.tgz"
+  "version" "0.1.1"
+
+"typescript@^4.6.2":
+  "integrity" "sha512-HM/hFigTBHZhLXshn9sN37H085+hQGeJHJ/X7LpBWLID/fbc2acUMfU+lGD98X81sKP+pFa9f0DZmCwB9GnbAg=="
+  "resolved" "https://registry.npmmirror.com/typescript/-/typescript-4.6.2.tgz"
+  "version" "4.6.2"
