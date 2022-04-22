@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>渲染百万数据量</title>
+  </head>
+  <body>
+    <ul id="container"></ul>
+
+    <script type="text/javascript">
+      let now = Date.now();
+      let total = 100 * 10000;
+      let ul = document.getElementById('container');
+      for (let i = 0; i < total; i++) {
+        let li = document.createElement('li');
+        li.innerHTML = i;
+        ul.appendChild(li);
+      }
+      console.log('js 运行时间：', Date.now() - now); // 3315
+      setTimeout(function () {
+        console.log('渲染总运行时间：', Date.now() - now); // 29909
+      }, 0);
+    </script>
+  </body>
+</html>

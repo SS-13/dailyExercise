@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM to JSON</title>
+  </head>
+  <body>
+    <div id="app">
+      <div>text</div>
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+      </ul>
+    </div>
+
+    <script>
+      function dom2json(obj, container) {
+        obj['tag'] = container.tagName.toLowerCase();
+        obj['attrs'] = {};
+        for (let i = 0; i < container.attributes.length; i++) {
+          let attr = container.attributes[i];
+          obj['attrs'][attr.name] = attr.value;
+        }
+        obj['children'] = [];
+
+        if (container.children.length === 0) {
+          if (container.innerText.trim()) {
+            const textObj = {};
+            textObj['tag'] = 'text';
+            textObj['content'] = container.innerText.trim();
+            obj['children'].push(textObj);
+          }
+          return obj;
+        } else {
+          for (let i = 0; i < container.children.length; i++) {
+            let child = container.children[i];
+            obj['children'].push(dom2json({}, child));
+          }
+
+          for (let i = 0; i < container.childNodes.length; i++) {
+            let child = container.childNodes[i];
+            if (child.nodeType === 3 && child.nodeValue.trim()) {
+              const textObj = {};
+              textObj['tag'] = 'text';
+              textObj['content'] = child.nodeValue.trim();
+              obj['children'].push(textObj);
+            }
+          }
+          return obj;
+        }
+      }
+
+      let app = document.getElementById('app');
+      let json = dom2json({}, app);
+      console.log(JSON.stringify(json), json);
+    </script>
+  </body>
+</html>
